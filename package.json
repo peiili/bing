@@ -1,0 +1,27 @@
+{
+  "name": "grepbing",
+  "version": "1.0.0",
+  "description": "简单获取bing桌面壁纸存如七牛oss",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "lint ": "eslint --fix",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "grbe"
+  ],
+  "author": "peiili",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "portfinder": "^1.0.25",
+    "qiniu": "^7.2.2",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2"
+  }
+}
