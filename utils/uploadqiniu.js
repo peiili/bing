@@ -1,4 +1,6 @@
 const qiniu = require('qiniu');
+const { uploadImg } = require('./database');
+
 const { accesskey, SecretKey } = require('./../config/bingUrl');
 
 const config = new qiniu.conf.Config();
@@ -12,8 +14,8 @@ const putPolicy = new qiniu.rs.PutPolicy(options);
 const mac = new qiniu.auth.digest.Mac(accesskey, SecretKey);
 const uploadToken = putPolicy.uploadToken(mac);
 module.exports = {
-  upload: (name, src) => {
-    console.log(src);
+  upload: (name, src, desc) => {
+    // console.log(src);
     const localFile = src;
     const formUploader = new qiniu.form_up.FormUploader(config);
     const putExtra = new qiniu.form_up.PutExtra();
@@ -24,7 +26,7 @@ module.exports = {
         throw respErr;
       }
       if (respInfo.statusCode === 200) {
-        console.log(respBody);
+        uploadImg(respBody, desc);
       } else {
         console.log(respInfo.statusCode);
         console.log(respBody);
