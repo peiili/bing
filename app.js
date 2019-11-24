@@ -6,11 +6,10 @@ const app = express();
 
 getBingImg();
 setInterval(() => {
-
 }, 1000 * 60 * 60 * 24);
 portfinder.getPort({
-  port: 3000, // minimum port
-  stopPort: 3333, // maximum port
+  port: 3000,
+  stopPort: 3333,
 }, (err, freePortal) => {
   if (err) {
     throw err;

@@ -21,15 +21,26 @@ module.exports = {
     const putExtra = new qiniu.form_up.PutExtra();
     const key = name;
     // 文件上传
-    formUploader.putFile(uploadToken, key, localFile, putExtra, (respErr, respBody, respInfo) => {
-      if (respErr) {
-        throw respErr;
-      }
-      if (respInfo.statusCode === 200) {
-        uploadImg(respBody, desc);
-      } else {
-        console.log(respInfo.statusCode);
-        console.log(respBody);
+    const selectSql = 'SELECT * FROM xek_bing WHERE name = ?';
+
+    uploadImg(selectSql, [key], (res) => {
+      if (!res.length) {
+        formUploader.putFile(uploadToken, key, localFile, putExtra, (respErr, respBody, respInfo) => {
+          if (respErr) {
+            throw respErr;
+          }
+          if (respInfo.statusCode === 200) {
+            const sql = 'insert into `xek_bing` (`id`,`name`,`describe`,`bash`,`create_date`) values (?,?,?,?,NOW());';
+            const value = [new Date().getTime(), respBody.key, JSON.stringify(desc), respBody.hash];
+
+            uploadImg(sql, value, (resp) => {
+              console.log(resp);
+            });
+          } else {
+            console.log(respInfo.statusCode);
+            console.log(respBody);
+          }
+        });
       }
     });
   },

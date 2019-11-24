@@ -4,8 +4,8 @@
   "description": "简单获取bing桌面壁纸存如七牛oss",
   "main": "app.js",
   "scripts": {
-    "dev": "set NODE_ENV=dev && nodemon app.js",
-    "run": "set NODE_ENV=production && node app.js",
+    "dev": "set NODE_ENV=dev&&nodemon app.js",
+    "run": "set NODE_ENV=production&&node app.js",
     "lint ": "eslint --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

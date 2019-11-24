@@ -9,10 +9,7 @@ const pool = mysql.createPool({
   password: databaseConfig.password,
   database: databaseConfig.database,
 });
-function uploadImg(respBody, describe) {
-  const sql = 'insert into `xek`.`xek_bing` (`id`,`name`,`describe`,`bash`,`create_date`) values (?,?,?,?,NOW());';
-  console.log(respBody.hash);
-  const value = [new Date().getTime(), respBody.key, JSON.stringify(describe), respBody.hash];
+function uploadImg(sql, value, callback) {
   pool.getConnection((err, connection) => {
     if (err) {
       throw err;
@@ -21,6 +18,7 @@ function uploadImg(respBody, describe) {
         if (error) {
           throw error;
         } else {
+          callback(results);
         }
       });
       console.log(query.sql);

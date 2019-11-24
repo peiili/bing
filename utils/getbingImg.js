@@ -9,13 +9,7 @@ module.exports = {
       if (error) {
         throw error;
       } else {
-        const dataList = [];
-        // console.log(process.env.NODE_ENV);
         JSON.parse(body).images.forEach((e) => {
-          dataList.push({
-            src: bingHost + e.url,
-            name: e.copyright,
-          });
           let extName = '';
           const writeStream = (name) => fs.createWriteStream(name);
           const readStream = request(bingHost + e.url);
@@ -27,7 +21,7 @@ module.exports = {
 
           });
           readStream.on('end', () => {
-            upload(`${e.startdate}${extName}`, `x:/Users/10179/Documents/bing/local/${e.startdate}${extName}`, e.copyright);
+            upload(`${e.startdate}${extName}`, `${__dirname}/../local/${e.startdate}${extName}`, e.copyright);
           });
         });
       }
