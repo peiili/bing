@@ -10,8 +10,10 @@ const devs = {
   user: 'root',
   database: 'xek_test',
 };
-const env = process.env.NODE_ENV;
+let env = '';
+env = process.env.NODE_ENV;
 console.log(env);
+console.log(env.trim());
 
 module.exports = {
   databaseConfig: env.trim() === 'dev' ? devs : production,
