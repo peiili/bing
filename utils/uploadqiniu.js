@@ -10,11 +10,12 @@ const options = {
   returnBody: '{"key":"$(key)","hash":"$(etag)","fsize":$(fsize),"bucket":"$(bucket)","name":"$(x:name)"}',
   callbackBodyType: 'application/json',
 };
-const putPolicy = new qiniu.rs.PutPolicy(options);
-const mac = new qiniu.auth.digest.Mac(accesskey, SecretKey);
-const uploadToken = putPolicy.uploadToken(mac);
+
 module.exports = {
   upload: (name, src, desc) => {
+    const putPolicy = new qiniu.rs.PutPolicy(options);
+    const mac = new qiniu.auth.digest.Mac(accesskey, SecretKey);
+    const uploadToken = putPolicy.uploadToken(mac);
     // console.log(src);
     const localFile = src;
     const formUploader = new qiniu.form_up.FormUploader(config);
