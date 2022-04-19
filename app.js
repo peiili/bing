@@ -6,6 +6,7 @@ const app = express();
 
 getBingImg();
 setInterval(() => {
+  getBingImg();
 }, 1000 * 60 * 60 * 24);
 portfinder.getPort({
   port: 3000,
