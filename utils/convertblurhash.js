@@ -39,7 +39,7 @@ function imageToHash(src, cb) {
     const { height } = image;
     loadImage(src).then((img) => {
       doEncode(img, width, height, (hash) => {
-        cb({ short_hash: hash, short_width: width, short_height: height });
+        cb({ shortHash: hash, shortWidth: width, shortHeight: height });
       });
     });
   };
